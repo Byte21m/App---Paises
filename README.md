@@ -16,7 +16,3 @@ Una aplicación web interactiva para buscar información detallada sobre cualqui
   - [REST Countries](https://restcountries.com/) (Datos geográficos)
   - [OpenWeatherMap](https://openweathermap.org/) (Datos meteorológicos)
 
-## 📦 Instalación
-1. Clona el repositorio:
-   ```bash
-   git clone [https://github.com/Byte21m/App---Paises.git](https://github.com/Byte21m/App---Paises.git)
