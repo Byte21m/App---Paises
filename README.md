@@ -1,6 +1,6 @@
 # 🌍 Buscador de Países
 
-🔗 **Pagina web en Vivo:** [(https://byte21m.github.io/App---Paises/)/)
+🔗 **Pagina web en Vivo:** https://byte21m.github.io/App---Paises/
 Una aplicación web interactiva para buscar información detallada sobre cualquier país del mundo en tiempo real.
 
 ## 🚀 Características
