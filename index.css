@@ -1,0 +1,222 @@
+/* --- Normalización --- */
+*, ::before, ::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  border-style: solid;
+}
+
+/* 1. FONDO DE SEGURIDAD */
+/* Si la imagen falla o tarda en cargar, se verá este color azul oscuro en lugar de gris/blanco */
+html {
+  background-color: #0f172a; 
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  position: relative; 
+}
+
+/* 2. EL FONDO "NUCLEAR" (Solución Definitiva) */
+body::before {
+  content: "";
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  
+  /* CAMBIO CLAVE: Usamos vw y vh para forzar el tamaño de la ventana visible */
+  width: 100vw; 
+  height: 100vh; 
+  
+  z-index: -1; 
+  
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.75), rgba(30, 41, 59, 0.85)),
+              url('img/fondopaises-sm.jpg');
+  
+  /* OPCIÓN A (Recomendada): La imagen cubre todo sin deformarse (se recorta un poco si es necesario) */
+  background-size: cover;
+
+
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* --- Resto  estilos  --- */
+
+.main {
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh; 
+  transition: all 0.5s ease-in-out;
+  width: 100%;
+}
+
+.form-container.searching {
+  height: 20vh; 
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  transition: all 0.5s ease; 
+}
+
+.form-container.searching .title {
+  opacity: 0;       
+  height: 0;        
+  margin: 0;        
+  overflow: hidden; 
+}
+
+input#search {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  background-color: rgba(51, 65, 85, 0.9); 
+  color: white;
+  font-size: 1.2rem;
+  border: 2px solid transparent;
+  outline: none;
+  transition: border-color 0.3s, background-color 0.3s;
+  backdrop-filter: blur(5px); 
+}
+
+input#search:focus {
+  border-color: #6366f1;
+  background-color: rgba(51, 65, 85, 1);
+}
+
+input#search::placeholder {
+  color: rgba(255, 255, 255, 0.7); 
+  opacity: 1; 
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-msg {
+  font-size: 1.2rem;
+  color: #cbd5e1;
+  margin-top: 2rem;
+  text-align: center;
+  background: rgba(0,0,0,0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.countries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.country-card {
+  background: rgba(30, 41, 59, 0.85); 
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  backdrop-filter: blur(5px);
+}
+
+.country-card:hover { transform: translateY(-5px); }
+
+.country-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.country-card h3 {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.single-country-card {
+  display: flex;
+  background: rgba(30, 41, 59, 0.85); 
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 2rem;
+  max-width: 850px;
+  width: 100%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.flag-side {
+  flex: 1;
+  position: relative;
+}
+
+.flag-side img.flag-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.weather-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  gap: 10px;
+}
+
+.weather-overlay img { width: 40px; height: 40px; }
+
+.info-side {
+  flex: 1;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-side h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.info-side p { margin-bottom: 0.5rem; font-size: 1.1rem; color: #e2e8f0; }
+.info-side strong { color: #94a3b8; }
+
+@media (max-width: 768px) {
+  .title { font-size: 2rem; }
+  .single-country-card { flex-direction: column; }
+  .flag-side { height: 250px; }
+}
